@@ -1,0 +1,6 @@
+# Install roles from the Ansible Galaxy
+- src: geerlingguy.certbot
+- src: geerlingguy.java
+- src: geerlingguy.jenkins
+- src: geerlingguy.nginx
+

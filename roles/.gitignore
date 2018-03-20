@@ -1,0 +1,3 @@
+# ignore roles from ansible galaxy
+geerlingguy.*/
+

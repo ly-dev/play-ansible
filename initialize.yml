@@ -1,0 +1,9 @@
+---
+
+- name: Provision an ansible target server with python-minimal
+  hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - role: python-minimal
+

@@ -1,0 +1,4 @@
+---
+# use raw to work on a blank server and install python-minimal.
+- name: Install python-minimal
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
