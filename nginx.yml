@@ -1,0 +1,25 @@
+---
+
+- name: Provision an ansible target server with nginx based web server
+  hosts: all
+  gather_facts: true
+  become: yes
+
+  vars:
+    nginx_use_ppa: true
+    nginx_remove_default_vhost: true
+    nginx_vhosts:
+      - server_name: "test.genome-rnn.org"
+        root: "/var/www/test"
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+
+    - name: Install dependencies.
+      package: name=curl state=present
+
+  roles:
+    - { role: geerlingguy.nginx }
