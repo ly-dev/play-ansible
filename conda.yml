@@ -1,0 +1,17 @@
+---
+
+- name: Provision an ansible target server with java 8
+  hosts: all
+  gather_facts: true
+
+  vars:
+    miniconda_url: >
+      http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+    miniconda_environments:
+      - name: tensorflow
+        python_version: 3.6
+        pkgs: 'pip'
+    miniconda_modify_path: yes
+     
+  roles:
+    - role: miniconda
