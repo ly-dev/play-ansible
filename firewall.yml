@@ -1,0 +1,36 @@
+---
+
+- name: Provision an ansible target server with python-minimal
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks: 
+  - name: Reset firewall
+    ufw:
+      state: reset
+  - name: Set firewall default allow outgoing
+    ufw:
+      policy: allow
+      direction: outgoing
+  - name: Set firewall default deny incoming
+    ufw:
+      policy: deny
+      direction: incoming
+  - name: Allow OpenSSH
+    ufw:
+      rule: allow
+      name: OpenSSH
+  - name: Allow HTTP
+    ufw:
+      rule: allow
+      port: 80
+      proto: tcp
+  - name: Allow HTTPS
+    ufw:
+      rule: allow
+      port: 443
+      proto: tcp
+  - name: Enable firewall
+    ufw:
+      state: enabled
+   
