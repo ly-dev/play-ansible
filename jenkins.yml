@@ -1,6 +1,6 @@
 ---
 
-- name: Provision an ansible target server with java 8
+- name: Provision an ansible target server with jenkins on java 8 and expose by nginx
   hosts: all
   gather_facts: true
   become: yes
@@ -9,6 +9,13 @@
     jenkins_plugins:
       - ssh
     jenkins_plugin_timeout: 120
+    nginx_use_ppa: true
+    nginx_remove_default_vhost: true
+    nginx_vhost_template: "{{ inventory_dir }}/templates/jenkins.j2"
+    nginx_vhosts:
+      - server_name: "jenkins.{{ inventory_hostname }}"
+        listen: 80
+        filename: "jenkins.{{ inventory_hostname }}"
   
   pre_tasks:
     - name: Update apt cache.
@@ -22,3 +29,4 @@
       java_packages:
         - openjdk-8-jdk
     - role: geerlingguy.jenkins
+    - role: geerlingguy.nginx    
