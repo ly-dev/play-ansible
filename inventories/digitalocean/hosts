@@ -1,0 +1,3 @@
+[wing-servers]
+genome-rnn.org ansible_host=206.189.124.56
+
